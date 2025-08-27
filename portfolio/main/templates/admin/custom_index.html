@@ -1,0 +1,72 @@
+{% extends "admin/index.html" %}
+{% block title %}Portfolio | Admin Dashboard{% endblock title %}
+{% block content %}
+<style>
+    #header {
+        background-color :#225961;
+        padding: 2%;
+    }
+    #site-name a{
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        color: rgb(245, 245, 242) !important;
+    }
+    #content h1{
+         text-align: center;
+         font-size: xx-large;
+         font-weight: 500;
+         color : white;
+         text-decoration:solid;
+    }
+    .module {
+         position: relative;
+         padding : 0%;
+   }
+    #content-related {
+        background-color: #fdf6f6;
+        width : 26%;
+    }
+    .content {
+        background-color: #264b5d;
+        overflow-x: hidden;
+        display: flex;
+    }
+    h3 {
+        text-align: center;
+        font-size: xx-large;
+        color: aliceblue;
+    }
+    ul {
+        margin-top: 10%;
+        margin-left: 1.5rem;
+    }
+    ul li {
+        display: inline;
+        border: 2px solid white;
+        border-radius: 10px;
+        padding: 1.5%;
+        margin-left: 3%;
+        position: relative;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+    a:link , a:visited {
+        color: aliceblue;
+        text-decoration: none;
+    }
+    ul li a{
+        background-color: transparent;
+        position:relative;
+    }
+    li:hover{
+        background-color: teal;
+    }
+</style>
+    <div class="btns">
+        <h3>Select What Do You Want To Do</h3>
+        <ul>
+            <li><a href="{% url 'admin:main_profile_changelist' %}">Manage Profile</a></li>
+            <li><a href="{% url 'admin:main_skill_changelist' %}">Manage Skills</a></li>
+            <li><a href="{% url 'admin:main_about_changelist' %}">Edit About Section</a></li>
+        </ul>
+</div>
+</div>
+{% endblock content %}

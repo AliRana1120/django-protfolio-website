@@ -1,0 +1,95 @@
+{% extends "admin/base_site.html" %}
+{% load static i18n %}
+{% block extrastyle %}
+    {{ block.super }}
+<style>
+    #content {
+        background-color: #225961;
+        perspective: 800px;
+    }
+.toggle-nav-sidebar {
+    background-color: #264b5d;
+}
+header {
+    background-color:  #225961 !important;
+    border-bottom: #fff !important;
+    color: aliceblue;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    cursor: default;
+}
+.login-box {
+    margin: 7% 30%;
+    border-radius: 10px;
+    border: 3px solid #fffefe;
+    box-shadow: 2px 2px 50px rgba(3, 3, 3, 0.3),-2px -2px 50px rgba(255,255,255,0.5);
+    padding: 5%;
+    background-color: #264b5d;
+    color: #fff;
+}
+.form-group {
+    text-align: center;
+    margin-top: 5%;
+    font-size: larger;
+}
+h1 {
+    text-align: center;
+    font-size: x-large;
+    font-weight: 700;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: aliceblue;
+}
+.login-btn {
+    background-color: rgb(240, 240, 240);
+    padding: 5px;
+    border-radius: 10px;
+    width: 40%;
+    padding: 10px;
+     box-shadow: 2px 2px 5px rgba(3, 3, 3, 0.3),-2px -2px 5px rgba(255,255,255,0.5);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: block;
+    margin: 0 auto;
+    overflow: hidden;
+    margin-top: 5%;
+}
+.login-btn:hover {
+    background-color:#225961;
+    color:white;
+    cursor: pointer;
+   transform: translateY(5px);
+  transition: transform 0.3s ease;
+}
+.error {
+    text-align: center;
+}
+</style>
+{% endblock %}
+{% block title %}Portfolio Admin Login{% endblock %}
+{% block branding %}<header>X<h1 style="text-align: center; font-size: xx-large;">Portfolio Administration Portal</h1></header>{% endblock branding %}
+{% block content %}
+<style>
+</style>
+<div class="login-container">
+    <div class="login-box">
+        <h1 style="text-align: center;font-family: Verdana, Geneva, Tahoma, sans-serif;font-size: x-large;">Portfolio Admin Login</h1>
+        {% if form.errors %}
+            <p class="error">Invalid username or password. Try again.</p>
+        {% endif %}
+        <form method="post" action="{% url 'admin:login' %}">
+        {% csrf_token %}
+         <div class="form-group">
+                <label for="id_username">Username</label>
+                <input type="text" name="username" autofocus required id="id_username">
+            </div>
+
+            <div class="form-group">
+                <label for="id_password">Password</label>
+                <input type="password" name="password" required id="id_password">
+            </div>
+
+            <button type="submit" class="login-btn">Login</button>
+
+            <input type="hidden" name="next" value="{{ next }}">
+        </form>
+    </div>
+</div>
+{% endblock content %}

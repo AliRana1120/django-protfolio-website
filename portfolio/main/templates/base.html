@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Portfolio{% endblock %}</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* Header */
+        .header {
+            background-color: #9b989d;
+            color: #f2e0e0;
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo a {
+            color: #fff;
+            text-decoration:none;
+            font-size: 3.5rem;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+            padding-top: 1rem;
+            padding-left: 0.3rem;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        .nav-btn {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: large;
+        }
+
+        .nav-btn:hover{
+            color:rgb(0, 0, 0);
+        }
+        .nav-btn.active{
+            color: black;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #8c888e;
+            color: #f9f9f9;
+            padding: 1rem 0;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .footer .socials a {
+            color: #f9f3f3;
+            text-decoration: none;
+            margin: 0 0.5rem;
+        }
+
+        .footer .socials a:hover {
+            color: #fff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar ul {
+                flex-direction: column;
+                display: none;
+            }
+
+            .navbar ul.show {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+        }
+        <!--for dark mode toggle-->        
+:root {
+    --bg-color: #fff;
+    --text-color: #111;
+    --border-color: #111
+}
+
+[data-theme="dark"] {
+    --bg-color: #111;
+    --text-color: #eee;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border-color: var(--border-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.8s ease-out forwards;
+}
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.toggle-button {
+   border: 3px solid rgba(241, 241, 241, 0.457);
+   border-radius: 10px;
+   width: 3%;
+   position: relative;
+   overflow: hidden;
+   background-color: rgb(17, 1, 247);
+   transition: background-color 0.3s ease; 
+}
+.btn1 {
+    cursor: pointer;
+    position: absolute;
+    width: 55%; 
+    height: 90%;
+    border-color:#100000;
+    border-radius: 10px;
+    transition: transform 0.6s ease;
+}
+.toggle-button.active {
+    background-color: #f6ce03;
+}
+.toggle-button.active .btn1 {
+    transform: translateX(15px);
+}
+    </style>
+</head>
+
+<body data-theme="light">
+
+    <!-- ✅ HEADER -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo"><a href="/">MyPortfolio</a></h1>
+            <nav class="navbar" id="navbar">
+                <ul>
+                    <li><a href="/" class='nav-btn {% if request.path == '/' %}active{% endif %}'>Home</a></li>
+                    <li><a href="/about/" class='nav-btn {% if request.path == '/about/' %}active{% endif %}'>About</a></li>
+                    <li><a href="/projects/" class='nav-btn {% if request.path == '/projects/' %}active{% endif %}'>Projects</a></li>
+                    <li><a href="/contact/" class='nav-btn {% if request.path == '/contact/' %}active{% endif %}'>Contact</a></li>
+                    <div class="toggle-button active" id="toggle-button" onclick ="toggleDarkMode()">
+            <button class = "btn1" >
+            </button>
+                    </div>
+                </ul>
+            </nav>
+            <button class="nav-toggle" onclick="toggleNavbar()">☰</button>
+        </div>
+    </header>
+
+    <!-- ✅ MAIN CONTENT -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- ✅ FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; {{ year }} MyPortfolio. All rights reserved.</p>
+            <div class="socials">
+                <a href="https://github.com/" target="_blank">GitHub</a> |
+                <a href="https://linkedin.com/" target="_blank">LinkedIn</a> |
+                <a href="muhammadalirana40702@gmail.com">Email</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        function toggleNavbar() {
+            const navbar = document.getElementById("navbar").querySelector("ul");
+            navbar.classList.toggle("show");
+        }
+        function toggleDarkMode() {
+    const html = document.documentElement;
+    const currentTheme = html.getAttribute("data-theme");
+    html.setAttribute("data-theme", currentTheme === "dark" ? "light" : "dark");
+    const toggle = document.querySelector(".toggle-button");
+    toggle.classList.toggle("active");
+}
+ 
+
+    </script>
+</body>
+</html>
