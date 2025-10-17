@@ -46,12 +46,14 @@ A personal portfolio website built with **Django**, featuring a custom admin das
    in your browser.
 
 <h1>Screenshots of User UI</h1>
+
 <h3>Homepage View</h3>
-<img width="1920" height="1200" alt="Screenshot (14)" src="https://github.com/user-attachments/assets/eaf9daa8-670d-4ebc-b913-50f2383a255e" />
+<img width="1920" height="1200" alt="Screenshot (26)" src="https://github.com/user-attachments/assets/13dda57e-7417-42cb-932c-67ebc2ec7dd9" />
 
 <h3>Aboutpage View</h3>
-<img width="1920" height="1200" alt="Screenshot (16)" src="https://github.com/user-attachments/assets/8c15d413-034e-4e98-850d-9a6b30ff5f28" />
-<img width="1920" height="1200" alt="Screenshot (15)" src="https://github.com/user-attachments/assets/522b85f5-9c6c-4a30-bc55-aedec8fc5241" />
+<img width="1920" height="1200" alt="Screenshot (27)" src="https://github.com/user-attachments/assets/1eafbe05-a1c5-4774-9546-8f1383fac9ff" />
+<img width="1920" height="1200" alt="Screenshot (28)" src="https://github.com/user-attachments/assets/c56e619d-3459-495f-9087-a124f99744a1" />
+
 
 <h1>Screenshots of Admin UI</h1>
 <h3>Admin Dashboard</h3>
