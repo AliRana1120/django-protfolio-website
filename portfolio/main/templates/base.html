@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}My Portfolio{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <style>
         /* Basic Reset */
         * {
@@ -21,16 +22,16 @@
 
         /* Header */
         .header {
-            background-color: #9b989d;
-            color: #f2e0e0;
-            padding: 1.5rem 0;
-            position: sticky;
+            background-color:transparent;
+            color: var(--text-color);
+            padding: 0.7rem 0;
+            position: relative;
             top: 0;
             z-index: 1000;
         }
 
         .logo a {
-            color: #fff;
+            color:var(--text-color);
             text-decoration:none;
             font-size: 3.5rem;
             font-family:Verdana, Geneva, Tahoma, sans-serif;
@@ -46,44 +47,44 @@
         }
 
         .nav-btn {
-            color: #fff;
+            color:var(--text-color);
             text-decoration: none;
             font-weight: 500;
             font-size: large;
         }
 
         .nav-btn:hover{
-            color:rgb(0, 0, 0);
+            color:rgb(2, 192, 81);
         }
         .nav-btn.active{
-            color: black;
+            color:rgb(2, 192, 81);
         }
 
         .nav-toggle {
             display: none;
             background: none;
             border: none;
-            color: #fff;
+            color:rgb(2, 192, 81);
             font-size: 1.5rem;
         }
 
         /* Footer */
         .footer {
-            background-color: #8c888e;
-            color: #f9f9f9;
+            background-color:transparent;
+            color:var(--text-color);
             padding: 1rem 0;
             text-align: center;
             margin-top: 2rem;
         }
 
         .footer .socials a {
-            color: #f9f3f3;
+            color: var(--text-color);
             text-decoration: none;
             margin: 0 0.5rem;
         }
 
         .footer .socials a:hover {
-            color: #fff;
+            color:var(--text-color);
         }
 
         /* Responsive */
@@ -98,19 +99,24 @@
             }
 
             .nav-toggle {
-                display: block;
+                display: inline-block;
             }
         }
         <!--for dark mode toggle-->        
 :root {
     --bg-color: #fff;
     --text-color: #111;
-    --border-color: #111
+     --border-color : rgba(0, 0, 0, 0.1);
+     --gradient: linear-gradient(135deg, #0077ff, #00bcd4);
+     --gradient-color: white;
 }
 
 [data-theme="dark"] {
+    --border-color: #fffafa;
     --bg-color: #111;
     --text-color: #eee;
+    --gradient-color: linear-gradient(135deg, #00ff87, #00b3ff);
+
 }
 
 body {
@@ -139,6 +145,27 @@ body {
    background-color: rgb(17, 1, 247);
    transition: background-color 0.3s ease; 
 }
+@media (max-width: 1024px) {
+  .toggle-button {
+    width: 45px;
+    height: 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  .toggle-button {
+    width: 40px;
+    height: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .toggle-button {
+    width: 35px;
+    height: 20px;
+    border-width: 2px;
+  }
+}
 .btn1 {
     cursor: pointer;
     position: absolute;
@@ -159,7 +186,6 @@ body {
 
 <body data-theme="light">
 
-    <!-- ✅ HEADER -->
     <header class="header">
         <div class="container">
             <h1 class="logo"><a href="/">MyPortfolio</a></h1>
@@ -179,17 +205,15 @@ body {
         </div>
     </header>
 
-    <!-- ✅ MAIN CONTENT -->
     <main>
         {% block content %}
         {% endblock %}
     </main>
 
-    <!-- ✅ FOOTER -->
     <footer class="footer">
         <div class="container">
             <p>&copy; {{ year }} MyPortfolio. All rights reserved.</p>
-            <div class="socials">
+            <div class="socials"><br>
                 <a href="https://github.com/" target="_blank">GitHub</a> |
                 <a href="https://linkedin.com/" target="_blank">LinkedIn</a> |
                 <a href="muhammadalirana40702@gmail.com">Email</a>
@@ -201,13 +225,32 @@ body {
             const navbar = document.getElementById("navbar").querySelector("ul");
             navbar.classList.toggle("show");
         }
-        function toggleDarkMode() {
-    const html = document.documentElement;
+        document.addEventListener("DOMContentLoaded", () => {
+  const html = document.documentElement;
+  const savedTheme = localStorage.getItem("theme");
+  const toggle = document.querySelector(".toggle-button");
+
+  // Apply saved theme if exists, otherwise default to light
+  if (savedTheme) {
+    html.setAttribute("data-theme", savedTheme);
+    if (savedTheme === "dark") {
+      toggle.classList.add("active");
+    }
+  } else {
+    html.setAttribute("data-theme", "light");
+  }
+
+  // Toggle button click event
+  toggle.addEventListener("click", () => {
     const currentTheme = html.getAttribute("data-theme");
-    html.setAttribute("data-theme", currentTheme === "dark" ? "light" : "dark");
-    const toggle = document.querySelector(".toggle-button");
+    const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+    html.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme); // save user preference
+
     toggle.classList.toggle("active");
-}
+  });
+});
  
 
     </script>

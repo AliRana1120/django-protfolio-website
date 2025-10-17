@@ -56,6 +56,7 @@ class project(models.Model):
     title = models.CharField(max_length=50)
     desc = models.CharField(max_length=500)
     projectlink = models.URLField(max_length=200)
+    projectgithub = models.URLField(max_length=200,null=True,blank=True)
     projectimg = models.ImageField(upload_to="profile_pics/",null=True,blank=True, height_field=None, width_field=None, max_length=None)
  
     def __str__(self):
